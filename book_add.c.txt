@@ -1,0 +1,89 @@
+#include "library.h"
+
+void add_book(BOOK **ptr)
+{
+    BOOK *new;
+    BOOK *temp;
+
+    static int id = 1001;
+
+    new = (BOOK *)malloc(sizeof(BOOK));
+
+    if(new == NULL)
+    {
+        printf("\nMemory Allocation Failed\n");
+        return;
+    }
+
+    /* Auto Generate Book ID */
+
+    new->id = id++;
+
+
+    printf("\nEnter Book Title : ");
+    scanf(" %[^\n]",new->title);
+
+
+    printf("Enter Author Name : ");
+    scanf(" %[^\n]",new->author);
+
+
+
+    do
+    {
+
+        printf("Enter Quantity : ");
+
+        scanf("%d",&new->quantity);
+
+
+        if(new->quantity<=0)
+
+            printf("Invalid Quantity\n");
+
+
+    }while(new->quantity<=0);
+
+
+
+    new->next=NULL;
+
+
+
+    if(*ptr==NULL)
+
+    {
+
+        *ptr=new;
+
+    }
+
+
+    else
+
+    {
+
+        temp=*ptr;
+
+
+        while(temp->next)
+
+            temp=temp->next;
+
+
+
+        temp->next=new;
+
+    }
+
+
+
+    printf("\n---------------------------------\n");
+
+    printf("Book Added Successfully\n");
+
+    printf("Book ID : %d\n",new->id);
+
+    printf("---------------------------------\n");
+
+}
